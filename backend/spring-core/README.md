@@ -1,26 +1,37 @@
-#### Spring Demo
-demo|内容
-------|--------
-demo-spring-core01|ioc helloworld
-demo-spring-core02|Aliasing a bean outside the bean definition
-demo-spring-core03|Instantiation with a static factory method
-demo-spring-core04|Instantiation using an instance factory method
-demo-spring-core05|Constructor-based dependency injection
-demo-spring-core06|Setter-based dependency injection
-demo-spring-core07|Collections injection
-demo-spring-core08|Null and empty string values
-demo-spring-core09|XML shortcut with the p-namespace and c-namespace
-demo-spring-core10|Using depends-on
-demo-spring-core11|Lazy-initialized beans
-demo-spring-core12|Bean scopes
-demo-spring-core13|Customizing the nature of a bean and bean aware
-demo-spring-core14|Annotation-based container configuration
-demo-spring-core15|Classpath scanning and managed components
-demo-spring-core16|Java-based container configuration
-demo-spring-core17|Java-based configuration import xml configuration
-demo-spring-core18|Xml configuration import Java-based container configuration
-demo-spring-core19|Spring Expression Language(SpEL)
-demo-spring-core20|Schema-based AOP
-demo-spring-core21|@AspectJ-based AOP
-demo-spring-core22|Spring tx propagation
-demo-spring-core23|Spring tx isolation
+#### Spring Core 示例（单根包 `core`，按功能分子包）
+
+所有示例在 **com.demo.spring.core** 下，按功能聚合为子包，便于按主题浏览和运行。
+
+| 子包 | 内容 |
+|------|------|
+| **ioc.hello** | IoC HelloWorld |
+| **ioc.aliasing** | Aliasing a bean outside the bean definition |
+| **ioc.staticfactory** | Instantiation with a static factory method |
+| **ioc.instancefactory** | Instantiation using an instance factory method |
+| **di.constructor** | Constructor-based dependency injection |
+| **di.setter** | Setter-based dependency injection |
+| **di.collections** | Collections injection |
+| **di.nullempty** | Null and empty string values |
+| **di.pnamespace** | XML shortcut with the p-namespace and c-namespace |
+| **lifecycle.dependson** | Using depends-on |
+| **lifecycle.lazy** | Lazy-initialized beans |
+| **lifecycle.scope** | Bean scopes |
+| **bean.aware** | Customizing the nature of a bean and bean aware |
+| **annotation.config** | Annotation-based container configuration |
+| **annotation.scanning** | Classpath scanning and managed components |
+| **javaconfig.pure** | Java-based container configuration |
+| **javaconfig.importxml** | Java-based configuration import xml configuration |
+| **javaconfig.importjava** | Xml configuration import Java-based container configuration |
+| **spel** | Spring Expression Language (SpEL) |
+| **aop.schema** | Schema-based AOP |
+| **aop.aspectj** | @AspectJ-based AOP |
+| **tx.propagation** | Spring tx propagation |
+| **tx.isolation** | Spring tx isolation |
+
+**运行方式**：在 IDE 中运行对应子包下的 `Main` 类。配置文件与包路径对应，例如：
+
+- `src/main/resources/ioc/hello/applicationContext.xml`
+- `src/main/resources/tx/propagation/applicationContext.xml`（另有 `db.properties`）
+- `javaconfig/importxml` 下有 `default.properties`
+
+**编译**：在本目录执行 `mvn compile`。
