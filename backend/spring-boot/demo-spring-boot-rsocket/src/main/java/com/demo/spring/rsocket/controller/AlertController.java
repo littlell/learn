@@ -2,15 +2,16 @@ package com.demo.spring.rsocket.controller;
 
 import com.demo.spring.rsocket.dto.Alert;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.stereotype.Controller;
-
-import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Mono;
 
 @Controller
-@Slf4j
 public class AlertController {
+
+  private static final Logger log = LoggerFactory.getLogger(AlertController.class);
 
   @MessageMapping("alert")
   public Mono<Void> sendAlert(Mono<Alert> alertMono) {

@@ -23,7 +23,7 @@
     <amqp.version>3.6.5</amqp.version>
     <cglib.version>3.2.0</cglib.version>
     <jcip.version>1.0</jcip.version>
-    <reactor.version>2020.0.14</reactor.version>
+    <reactor.version>3.4.32</reactor.version>
   </properties>
 
   <dependencies>

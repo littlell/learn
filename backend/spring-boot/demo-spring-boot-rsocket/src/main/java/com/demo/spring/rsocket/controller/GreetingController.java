@@ -1,15 +1,16 @@
 package com.demo.spring.rsocket.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.stereotype.Controller;
-
-import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Mono;
 
 @Controller
-@Slf4j
 public class GreetingController {
+
+  private static final Logger log = LoggerFactory.getLogger(GreetingController.class);
 
   /**
    * rsocket-cli --request -i hello --route=greeting  ws://127.0.0.1:8080/rsocket

@@ -3,17 +3,18 @@ package com.demo.spring.rsocket.controller;
 import com.demo.spring.rsocket.dto.GratuityIn;
 import com.demo.spring.rsocket.dto.GratuityOut;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.stereotype.Controller;
+import reactor.core.publisher.Flux;
 
 import java.math.BigDecimal;
 
-import lombok.extern.slf4j.Slf4j;
-import reactor.core.publisher.Flux;
-
 @Controller
-@Slf4j
 public class GratuityController {
+
+  private static final Logger log = LoggerFactory.getLogger(GratuityController.class);
 
   @MessageMapping("gratuity")
   public Flux<GratuityOut> calculate(Flux<GratuityIn> gratuityInFlux) {
