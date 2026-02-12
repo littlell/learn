@@ -4,7 +4,7 @@
 
 **本目录现有内容：**
 
-- **demo/**：单模块，artifactId **java-demos**，按类型分包：basics、bytecode、cache、concurrency、design、function、jvm、cxf、rabbitmq、reactor、servlet、zookeeper。在本目录（`java/`）下执行 `mvn compile` 可编译。
+- **demo/**：独立 Maven 工程（与 backend 下 spring-core、spring-boot 一致），按类型分包。在 **java/demo** 目录下执行 `mvn compile` 可编译。
 - 单文件练习（如 `SecuritySecureRandomObservation.java`）可直接放在本目录下。
 
 可继续添加：JVM/GC 小实验、更多单文件 Demo、Java 新特性试用等。
@@ -23,8 +23,8 @@
 
 **java** 下已合并为**单一模块** **demo**（artifactId: java-demos），按代码类型分包（包名不变，仅工程合并）：
 
-- `com.demo.java.basics` — 泛型、SPI、序列化、Jackson、JNA 等
-- `com.demo.java.apache.cxf`、**bytecode**、**cache**、**concurrency**、**design**、**function**、**jvm**、**rabbitmq**、**reactor**、**servlet**、**zookeeper**
+- `com.demo.basics` — 泛型、SPI、序列化、Jackson、JNA 等
+- `com.demo.apache.cxf`、**bytecode**、**cache**、**concurrency**、**design**、**function**、**jvm**、**rabbitmq**、**reactor**、**servlet**、**zookeeper**
 
 原 12 个子模块已删除，仅保留 **demo**（packaging war，含 Servlet webapp）。运行方式见 `demo/README.md`。
 

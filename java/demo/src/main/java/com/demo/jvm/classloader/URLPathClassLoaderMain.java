@@ -8,14 +8,15 @@ import java.net.URL;
 
 public class URLPathClassLoaderMain {
   public static void main(String[] args) throws MalformedURLException, ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
-    File classFileDir = new File("E:/demo-java/demo-java-classloader/target/classes");
+    // 使用当前工程 target/classes（在 java/demo 下运行时的相对路径）
+    File classFileDir = new File("target/classes");
     URL classFileDirUrl = classFileDir.toURI().toURL();
 
     URL[] urls = new URL[]{classFileDirUrl};
 
     URLPathClassLoader urlPathClassLoader = new URLPathClassLoader(urls);
 
-    Class<?> aClass = urlPathClassLoader.loadClass("com.demo.classloader.Demo");
+    Class<?> aClass = urlPathClassLoader.loadClass("com.demo.jvm.classloader.Demo");
 
     System.out.println("classLoader: " + aClass.getClassLoader());
 

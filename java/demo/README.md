@@ -26,7 +26,7 @@
 
 ## 编译与打包
 
-在 **java** 目录下执行：
+在 **java/demo** 目录下执行：
 
 ```bash
 mvn compile
