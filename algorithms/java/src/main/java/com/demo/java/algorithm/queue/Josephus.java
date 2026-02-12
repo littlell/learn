@@ -1,7 +1,7 @@
 package com.demo.java.algorithm.queue;
 
+import java.security.SecureRandom;
 import java.util.Queue;
-import java.util.Random;
 import java.util.concurrent.ArrayBlockingQueue;
 
 public class Josephus {
@@ -21,8 +21,8 @@ public class Josephus {
   public static String josephus(Queue<String> queue) {
 
     for (int i = 0; i < queue.size() - 1; i++) {
-
-      int rand = new Random().nextInt(50);
+      // 使用 SecureRandom 替代 Random，与安全实践一致
+      int rand = new SecureRandom().nextInt(50);
 
       for (int j = 0; j < rand; j++) {
         String s = queue.poll();

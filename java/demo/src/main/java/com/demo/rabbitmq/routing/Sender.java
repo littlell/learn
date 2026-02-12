@@ -5,9 +5,9 @@ import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
 
 import java.io.IOException;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.concurrent.TimeoutException;
 
 public class Sender {
@@ -24,7 +24,8 @@ public class Sender {
     channel.exchangeDeclare(EXCHANGE_NAME, "direct");
 
     String[] routingKeys = new String[] {"info", "error", "warning"};
-    int index = new Random().nextInt(routingKeys.length);
+    // 使用 SecureRandom，避免弱随机数（即使当前仅用于路由键选择）
+    int index = new SecureRandom().nextInt(routingKeys.length);
 
     String severity = routingKeys[index];
     String message = "message";
