@@ -1,0 +1,32 @@
+@startuml
+
+start
+  :当前元素指向根节点;
+
+repeat
+
+:输出当前元素;
+
+if (左子树为空?) then (是)
+    if(右子树为空?) then (是)
+        if(栈为空?) then (是)
+            stop
+        else (否)
+            :栈顶元素出栈并赋值给当前元素;
+            :指向右子树
+            cur = cur.right;
+        endif
+    else (否)
+        :指向右子树
+        cur = cur.right;
+    endif
+else (否)
+    if (右子树为空?) then (是)
+    else (否)
+        :当前元素入栈;
+    endif
+    :指向左子树
+    cur = cur.left;
+endif
+
+@enduml

@@ -1,0 +1,47 @@
+{
+  "status": "UP",
+  "noneStatus": null,
+  "components": {
+    "db": {
+      "status": "UP",
+      "details": {
+        "database": "MySQL",
+        "validationQuery": "isValid()"
+      }
+    },
+    "diskSpace": {
+      "status": "UP",
+      "details": {
+        "total": 10434662400,
+        "free": 9037209600,
+        "threshold": 10485760,
+        "exists": true
+      }
+    },
+    "livenessState": {
+      "status": "UP"
+    },
+    "ping": {
+      "status": "UP"
+    },
+    "readinessState": {
+      "status": "UP"
+    },
+    "redis": {
+      "status": "UP",
+      "details": {
+        "version": "3.0.7.9"
+      }
+    }
+  },
+  "groups": [
+    {
+      "liveness": true,
+      "readiness": true
+    },
+    {
+      "liveness": false,
+      "readiness": false
+    }
+  ]
+}

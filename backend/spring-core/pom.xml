@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <properties>
+    <java.version>21</java.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <groupId>com.demo</groupId>
+  <artifactId>demo-spring-core</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <modules>
+    <module>demo-spring-core01</module>
+    <module>demo-spring-core02</module>
+    <module>demo-spring-core03</module>
+    <module>demo-spring-core04</module>
+    <module>demo-spring-core05</module>
+    <module>demo-spring-core06</module>
+    <module>demo-spring-core07</module>
+    <module>demo-spring-core08</module>
+    <module>demo-spring-core09</module>
+    <module>demo-spring-core10</module>
+    <module>demo-spring-core11</module>
+    <module>demo-spring-core12</module>
+    <module>demo-spring-core13</module>
+    <module>demo-spring-core14</module>
+    <module>demo-spring-core15</module>
+    <module>demo-spring-core16</module>
+    <module>demo-spring-core17</module>
+    <module>demo-spring-core18</module>
+    <module>demo-spring-core19</module>
+    <module>demo-spring-core20</module>
+    <module>demo-spring-core21</module>
+    <module>demo-spring-core22</module>
+    <module>demo-spring-core23</module>
+  </modules>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-framework-bom</artifactId>
+        <version>5.0.7.RELEASE</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>javax.annotation</groupId>
+        <artifactId>javax.annotation-api</artifactId>
+        <version>1.3.1</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+</project>

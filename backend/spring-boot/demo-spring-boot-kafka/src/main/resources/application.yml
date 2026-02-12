@@ -1,0 +1,11 @@
+spring:
+  # 应用配置
+  application:
+    name: kafka-demo
+  # Kafka 基础配置
+  kafka:
+    bootstrap-servers: dev.com:9092
+    # Kafka Admin配置，用于自动创建Topic
+    admin:
+      properties:
+        bootstrap.servers: dev.com:9092

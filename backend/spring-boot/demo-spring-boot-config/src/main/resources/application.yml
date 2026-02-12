@@ -1,0 +1,24 @@
+foo: bar
+spring:
+  datasource:
+    username: root
+    password: Ngtrade!@#
+    url: jdbc:mysql://dev.com:3306/spring?characterEncoding=utf8&useSSL=false
+  data:
+    redis:
+      host: dev.com
+      port: 6379
+      password: 123456
+management:
+  server:
+    port: 8001
+  endpoints:
+    enabled-by-default: true
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+    mappings:
+      enabled: true

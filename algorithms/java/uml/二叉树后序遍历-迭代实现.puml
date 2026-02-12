@@ -1,0 +1,31 @@
+@startuml
+
+start
+  :当前元素指向根节点;
+
+repeat
+
+if (左子树为空?) then (是)
+    if(右子树为空?) then (是)
+        :输出当前元素;
+        if(栈为空?) then (是)
+            stop
+        else (否)
+            :弹出栈顶元素;
+            :置空左子树
+            cur.left = null;
+        endif
+    else (否)
+        :入栈新节点
+        stack.push(new TreeNode(cur.val));
+        :指向右子树
+        cur = cur.right;
+    endif
+else (否)
+    :入栈当前节点
+    stack.push(cur);
+    :指向左子树
+    cur = cur.left;
+endif
+
+@enduml

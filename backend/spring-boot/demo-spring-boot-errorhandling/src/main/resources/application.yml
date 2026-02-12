@@ -1,0 +1,213 @@
+spring:
+  data:
+    redis:
+      host: 10.2.172.64
+      password: 123456
+      database: 0
+      port: 6379
+      timeout: 5000ms
+  cloud:
+    gateway:
+      routes:
+        # After route
+        - id: after_route
+          uri: forward:/demo
+          predicates:
+            - After=2050-04-20T15:00:00+08:00
+        # Before route
+        - id: before_route
+          uri: forward:/demo
+          predicates:
+            - Before=2020-04-20T15:00:00+08:00
+        # Between route
+        - id: between_route
+          uri: forward:/demo
+          predicates:
+            - Between=2040-01-20T17:42:47+08:00, 2050-01-21T17:42:47+08:00
+        # Header key match route
+        - id: header_route
+          uri: forward:/demo
+          predicates:
+            - Header=X-Request-Id, \d+
+        # Header host match route
+        - id: host_route
+          uri: forward:/demo
+          predicates:
+            - Host=**.dev.com
+        # Method route
+        - id: method_route
+          uri: forward:/demo
+          predicates:
+            - Method=PUT,DELETE
+        # 路径匹配，支持多个
+        - id: path_route
+          uri: forward:/demo
+          predicates:
+            - Path=/path/{segment}
+        # 参数匹配
+        - id: query_route
+          uri: forward:/demo
+          predicates:
+            - Query=red, gree.
+        # 源IP
+        - id: remoteaddr_route
+          uri: forward:/demo
+          predicates:
+            - RemoteAddr=127.0.0.2/32
+        # X-Forwarded-For header
+        - id: xforwarded_remoteaddr_route
+          uri: forward:/demo
+          predicates:
+            - XForwardedRemoteAddr=192.168.1.1/24
+
+        # 熔断配置
+        - id: circuitbreaker_route_1
+          uri: lb://backing-service:8088
+          predicates:
+            - Path=/circuitbreaker-route-1
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: myCircuitBreaker
+                fallbackUri: forward:/error/503
+                statusCodes:
+                  - 500
+                  - "NOT_FOUND"
+        - id: circuitbreaker_route_2
+          uri: lb://backing-service:8088
+          predicates:
+            - Path=/circuitbreaker-route-2
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: myCircuitBreaker
+                fallbackUri: forward:/error/500
+            - RewritePath=/circuitbreaker-route-2, /backingServiceEndpoint
+        - id: circuitbreaker_route_3
+          uri: lb://backing-service:8088
+          predicates:
+            - Path=/circuitbreaker-route-3/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: myCircuitBreaker
+                fallbackUri: forward:/demo
+        - id: circuitbreaker_route_3_fallback
+          uri: forward:/demo
+          predicates:
+            - Path=/demo
+        - id: circuitbreaker_route_4
+          uri: lb://backing-service:8088
+          predicates:
+            - Path=/circuitbreaker-route-4/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: myCircuitBreaker
+                fallbackUri: forward:/demo
+        - id: circuitbreaker_route_4_fallback
+          uri: forward:/demo
+          predicates:
+            - Path=/demo
+          filters:
+            - name: FallbackHeaders
+              args:
+                executionExceptionTypeHeaderName: Test-Header
+
+        # 基于原始header的值生成新的header
+        - id: map_request_header_route
+          uri: forward:/demo
+          predicates:
+            - Path=/map-request-header
+          filters:
+            - MapRequestHeader=Blue, X-Request-Red
+
+        # 增加前缀
+        - id: prefix_path_route
+          uri: http://localhost:8080
+          predicates:
+            - Path=/prefix-path
+          filters:
+            - PrefixPath=/new
+
+        # 限流配置
+        - id: request_ratelimiter_route
+          uri: lb://backing-service:8088
+          predicates:
+            - Path=/request-ratelimiter/**
+          filters:
+            - name: RequestRateLimiter
+              args:
+                name: REDIS
+                key-resolver: "#{@ipKeyResolver}"
+                redis-rate-limiter.replenishRate: 1
+                redis-rate-limiter.burstCapacity: 60
+                redis-rate-limiter.requestedTokens: 60
+        # 重定向
+        - id: redirect_route
+          uri: forward:/demo
+          predicates:
+            - Path=/redirect/**
+          filters:
+            - RedirectTo=302, http://localhost:8080/demo
+
+        # 重写
+        - id: rewrite_path1_route
+          uri: http://localhost:8080
+          predicates:
+            - Path=/rewrite-path-1/**
+          filters:
+            - RewritePath=/rewrite-path-1/?(?<segment>.*), /$\{segment}
+        - id: rewrite_path2_route
+          uri: http://localhost:8080
+          predicates:
+            - Path=/rewrite-path-2/**
+          filters:
+            - RewritePath=/rewrite-path-2/?(?<segment>.*), /rewrite-path-2-new/$\{segment}
+        - id: rewrite_path3_route
+          uri: http://localhost:8080
+          predicates:
+            - Path=/rewrite-path-3/**
+          filters:
+            - RewritePath=/rewrite-path-3/?(?<segment>.*), /rewrite-path-3-new/rewrite-path-3/$\{segment}
+
+        # Set path
+        - id: set_path_route
+          uri: http://localhost:8080
+          predicates:
+            - Path=/set-path/{segment}
+          filters:
+            - SetPath=/{segment}
+
+        # Set status
+        - id: set_status_1_route
+          uri: http://localhost:8080/demo
+          predicates:
+            - Path=/set-status-1/**
+          filters:
+            - SetStatus=UNAUTHORIZED
+        - id: set_status_2_route
+          uri: http://localhost:8080/demo
+          predicates:
+            - Path=/set-status-2/**
+          filters:
+            - SetStatus=401
+
+        # Strip prefix
+        - id: strip_prefix_route
+          uri: http://localhost:8080
+          predicates:
+            - Path=/strip-prefix/**
+          filters:
+            - StripPrefix=1
+
+        # Request size
+        - id: request_size_route
+          uri: lb://backing-service:8088/upload
+          predicates:
+            - Path=/upload
+          filters:
+            - name: RequestSize
+              args:
+                # Bytes
+                maxSize: 1

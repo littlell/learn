@@ -1,0 +1,73 @@
+# ========== 学习框架根目录 .gitignore ==========
+# 只保留核心源码与配置，构建产物与本地/IDE 文件不提交
+
+# ---------- 系统与本地 ----------
+.DS_Store
+.DS_Store?
+._*
+Thumbs.db
+ehthumbs.db
+*.swp
+*.swo
+*~
+
+# ---------- Java / Maven ----------
+target/
+build/
+out/
+*.class
+*.jar
+*.war
+*.ear
+*.nar
+*.zip
+*.apk
+*.dex
+bin/
+gen/
+.gradle/
+!gradle/wrapper/gradle-wrapper.jar
+
+# ---------- IDE ----------
+.idea/
+*.iml
+*.ipr
+*.iws
+.project
+.classpath
+.settings/
+.vscode/
+*.code-workspace
+
+# ---------- Python ----------
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+.Python
+venv/
+.venv/
+env/
+.env
+.env.local
+*.egg-info/
+.eggs/
+dist/
+*.egg
+.ipynb_checkpoints/
+
+# ---------- 日志与临时 ----------
+*.log
+log/
+logs/
+tmp/
+temp/
+*.tmp
+*.temp
+*.hprof
+*.threads
+
+# ---------- 其他常见构建/依赖 ----------
+node_modules/
+*.min.js
+*.min.css

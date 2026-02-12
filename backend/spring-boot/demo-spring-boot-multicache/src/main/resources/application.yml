@@ -1,0 +1,11 @@
+spring:
+  cache:
+    # HAZELCAST, REDIS, CAFFEINE, NONE;
+    type: NONE
+    cache-names: cache1, cache2
+  data:
+    redis:
+      host: dev.com
+      port: 6379
+      password: 123456
+      database: 1
